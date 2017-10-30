@@ -1,43 +1,50 @@
-package BinarySearch;
+package test;
 
-/**
- * An image is represented by a binary matrix with 0 as a white pixel and 1 as a black pixel.
- * The black pixels are connected, i.e., there is only one black region. Pixels are connected
- * horizontally and vertically. Given the location (x, y) of one of the black pixels, return the
- * area of the smallest (axis-aligned) rectangle that encloses all black pixels.
- * Example:
- * For example, given the following image:
- * [
- *  "0010",
- *  "0110",
- *  "0100"
- * ]
- * and x = 0, y = 2,
- * return 6.
- */
-public class SmallestRectangleEnclosingBlackPixels {
-    /*
-     * @param image: a binary matrix with '0' and '1'
-     * @param x: the location of one of the black pixels
-     * @param y: the location of one of the black pixels
-     * @return: an integer
-     */
-    public int minArea(char[][] image, int x, int y) {
-        // write your code here
-        //exception
-        if (image ==null || image.length == 0) {
-            return -1;
-        }
+public class TestSmallestRectangleEnclosingBlackPixels {
+    public static void main(String[] args) {
+        new TestSmallestRectangleEnclosingBlackPixels().test();
+    }
 
-        int left, right, top, down;
+    private void test() {
+        char[][] image = new char[3][4];
+        image[0][0] = '0';
+        image[0][1] = '0';
+        image[0][2] = '1';
+        image[0][3] = '0';
+        image[1][0] = '0';
+        image[1][1] = '1';
+        image[1][2] = '1';
+        image[1][3] = '0';
+        image[2][0] = '0';
+        image[2][1] = '1';
+        image[2][2] = '0';
+        image[2][3] = '0';
+        System.out.println(image.length);
 
+        int x = 0;
+        int y = 2;
+
+        int left,right,top,down;
         left = findLeft(image, y);
         right = findRight(image, y);
         top = findTop(image, x);
         down = findDown(image, x);
+        System.out.println("left is " + left);
+        System.out.println("right is : " + right);
+        System.out.println("top is : " + top);
+        System.out.println("down is : " + down);
+        System.out.println((right - left + 1)*(down - top + 1));
 
 
-        return (right - left + 1)*(down - top + 1);
+//        for (int i = 0; i < image.length ; i++) {
+//            for (int j = 0; j < image[0].length; j++) {
+//                System.out.println(image[i][j]);
+//            }
+//            System.out.println("\n");
+//        }
+
+
+
     }
 
     private int findLeft(char[][] image, int y) {
@@ -59,12 +66,14 @@ public class SmallestRectangleEnclosingBlackPixels {
             }
         }
 
+//        System.out.println("start is : " + start);
         //at last, we need to check the start point
         for (int i = 0; i < image.length; i++) {
             if (image[i][start] == '1') {
                 return start;
             }
         }
+
         return end;
     }
 
@@ -86,7 +95,7 @@ public class SmallestRectangleEnclosingBlackPixels {
                 end = mid;
             }
         }
-
+        System.out.println("111111start is " + start);
         //at last, we need to check the end point
         for (int i = 0; i < image.length; i++) {
             if (image[i][end] == '1') {
@@ -128,6 +137,7 @@ public class SmallestRectangleEnclosingBlackPixels {
     private int findDown(char[][] image, int x) {
         int start = x;
         int end = image.length - 1;
+//        System.out.println("1111111 end is :" + end);
         while (start + 1 < end) {
             boolean ifBlack = false;
             int mid = start + (end - start) / 2;
@@ -143,7 +153,7 @@ public class SmallestRectangleEnclosingBlackPixels {
                 end = mid;
             }
         }
-
+        System.out.println("end is : " + end);
         //at last, we need to check the end point
         for (int i = 0; i < image[0].length; i++) {
             if (image[end][i] == '1') {
@@ -152,4 +162,5 @@ public class SmallestRectangleEnclosingBlackPixels {
         }
         return start;
     }
+
 }
