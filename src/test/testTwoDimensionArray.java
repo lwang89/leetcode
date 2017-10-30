@@ -7,6 +7,5 @@ public class testTwoDimensionArray {
         System.out.println(image.length);
         //how many rows
         System.out.println(image[0].length);
-
     }
 }
