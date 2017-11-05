@@ -23,13 +23,7 @@ public class FindMinimumInRotatedSortedArray {
         if (nums.length == 1) {
             return nums[0];
         }
-//        if (nums.length == 2) {
-//            if (nums[0] < nums[1]) {
-//                return nums[0];
-//            } else {
-//                return nums [1];
-//            }
-//        }
+
         int min;
         int start = 0;
         int end = nums.length - 1;
