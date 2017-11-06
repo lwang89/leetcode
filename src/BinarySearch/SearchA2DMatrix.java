@@ -37,14 +37,52 @@ public class SearchA2DMatrix {
     }
 
     private int findLineOfTarget(int[][] matrix, int target) {
+        int start = 0;
+        int end = matrix.length - 1;
+
+        while (start + 1 < end) {
+            int mid = start + (end - start) / 2;
+            if (matrix[mid][0] < target && target < matrix[mid][matrix[mid].length - 1]) {
+                return mid;
+            }
+            if (target < matrix[mid][0]) {
+                end = mid;
+            }
+            if (target > matrix[mid][matrix[mid].length - 1]) {
+                start = mid;
+            }
+        }
+        if (matrix[start][0] <= target && target <= matrix[start][matrix[start].length - 1]) {
+            return start;
+        }
+        if (matrix[end][0] <= target && target <= matrix[end][matrix[end].length - 1]) {
+            return end;
+        }
+        return -1;
     }
 
     private boolean findTargetInRow(int[][] matrix, int target, int row) {
         //exception
-        if (row == -1 || row > matrix.length) {
+        if (row == -1 || row > matrix.length - 1) {
             return false;
         }
+        int start = 0;
+        int end = matrix[row].length - 1;
 
+        while (start + 1 < end) {
+            int mid = start + (end - start) / 2;
+            if (matrix[row][mid] == target) {
+                return true;
+            } else if (matrix[row][mid] < target) {
+                start = mid;
+            } else {
+                end = mid;
+            }
+        }
+
+        if (matrix[row][start] == target || matrix[row][end] == target) {
+            return true;
+        }
         return false;
     }
 }
